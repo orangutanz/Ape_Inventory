@@ -43,10 +43,10 @@ public:
 	class UTexture2D* Icon;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item", meta = (ClampMin = 0))
-	int maxStack = 1;
+	int32 maxStack = 1;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item", meta = (ClampMin = 0))
-	int Quantity = 0;
+	int32 Quantity = 1;
 
 	UPROPERTY()
 	class UInventoryComponent* OwnerInventory;

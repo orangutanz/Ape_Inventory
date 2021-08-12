@@ -7,28 +7,79 @@ bool UInventoryComponent::AddItem(UItem* item)
 	{
 		return false;
 	}
-	int32 itemIndex = -1;
-	UItem* itemFound = FindItem(item, itemIndex);
-
-	//If there's no same item in the inventory
-	if (!itemFound)
+	// if the item can not be stacked
+	if (item->maxStack == 1)
 	{
-		// Can not add item when inventory is full and there's no item to stack
 		if (Items.Num() >= Size)
 		{
 			return false;
 		}
-		else
+		else // add the item if there's a slot in the inventory
 		{
 			Items.Add(item);
+			item->OwnerInventory = this;
+
+			OnInventoryUpdated.Broadcast();
+			return true;
 		}
 	}
-	else
+
+	int32 foundIndex = 0;
+	UItem* itemFound = FindItem(item, foundIndex);
+
+	// If there's no same item in the inventory for the item to be stacked
+	if (!itemFound)
 	{
+		if (Items.Num() >= Size)
+		{
+			return false;
+		}
+		else // Add the item if there's a slot in the inventory
+		{
+			Items.Add(item);
+			item->OwnerInventory = this;
 
+			OnInventoryUpdated.Broadcast();
+			return true;
+		}
 	}
+	else // If there're same items in the inventory already
+	{
+		while (item->Quantity > 0 && (foundIndex >= 0 && foundIndex < Size))
+		{
+			int32 q = itemFound->Quantity;
+			int32 s = itemFound->maxStack;
+			int32 p = item->Quantity;
+			if (q == s) // If the item stack is full, find the next item.
+			{
+				itemFound = FindItem(item, ++foundIndex);
+			}
+			else if ((p + q) <= s) // If the item can be added within a stack
+			{
+				itemFound->Quantity = p + q;
+				item->~UItem();
 
-	return true;
+				OnInventoryUpdated.Broadcast();
+				return true;
+			}
+			else if ((p + q) > s) // If the item added will be more than max stack
+			{
+				itemFound->Quantity = p + q;
+				item->Quantity = q - (s - p);
+
+				itemFound = FindItem(item, ++foundIndex);
+			}
+			else if (Items.Num() < Size)
+			{
+				Items.Add(item);
+				item->OwnerInventory = this;
+
+				OnInventoryUpdated.Broadcast();
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 bool UInventoryComponent::RemoveItem(UItem* item)
@@ -38,37 +89,16 @@ bool UInventoryComponent::RemoveItem(UItem* item)
 
 UItem* UInventoryComponent::FindItem(UItem* item, int32& index)
 {
-	index = -1;
-	if (item)
+	if (item && (index < 0 || index >= Size))
 	{
 		return nullptr;
 	}
 
-	for (int i = 0; i<Items.Num(); i++)
+	for (index; index <Items.Num(); index++)
 	{
-		if (item->itemID == Items[i]->itemID)
+		if (item->itemID == Items[index]->itemID)
 		{
-			index = i;
-			return  Items[i];
-		}
-	}
-	return nullptr;
-}
-
-UItem* UInventoryComponent::FindItem_AfterIndex(UItem* item, int32& index)
-{
-	if (item)
-	{
-		return nullptr;
-	}
-
-	index += 1;
-	for (int i = index; i < Items.Num(); i++)
-	{
-		if (item->itemID == Items[i]->itemID)
-		{
-			index = i;
-			return  Items[i];
+			return  Items[index];
 		}
 	}
 	return nullptr;

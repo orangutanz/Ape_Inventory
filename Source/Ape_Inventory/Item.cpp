@@ -10,5 +10,6 @@ UItem::UItem()
 
 UItem::~UItem()
 {
+	Quantity = 0;
 	OwnerInventory = nullptr;
 }

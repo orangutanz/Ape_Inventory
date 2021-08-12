@@ -20,7 +20,6 @@ public:
 
 	//Find item
 	class UItem* FindItem(class UItem* item, int32& index);
-	class UItem* FindItem_AfterIndex(class UItem* item, int32& index);
 
 	UPROPERTY(EditDefaultsOnly, Instanced)
 	TArray<class UItem*> Items;
