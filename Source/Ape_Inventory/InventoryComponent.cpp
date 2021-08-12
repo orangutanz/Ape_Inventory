@@ -115,7 +115,6 @@ UItem* UInventoryComponent::FindItem(UItem* item, int32& index)
 }
 
 
-
 void UInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();

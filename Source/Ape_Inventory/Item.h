@@ -6,6 +6,8 @@
 #include "UObject/NoExportTypes.h"
 #include "Item.generated.h"
 
+class AApe_InventoryCharacter;
+
 UENUM(BlueprintType)
 enum ItemType
 {
@@ -51,8 +53,8 @@ public:
 	UPROPERTY()
 	class UInventoryComponent* OwnerInventory;
 
-	virtual void Use(class AApe_InventoryCharacter* Character) PURE_VIRTUAL(UItem, );
+	virtual void Use(AApe_InventoryCharacter* Character) PURE_VIRTUAL(UItem, );
 
 	UFUNCTION(BlueprintImplementableEvent)
-	void OnUse(class AApe_InventoryCharacter* Character);
+	void OnUse(AApe_InventoryCharacter* Character);
 };

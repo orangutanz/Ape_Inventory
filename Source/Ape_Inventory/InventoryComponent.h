@@ -1,10 +1,10 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
 #include "InventoryComponent.generated.h"
+
+class UItem;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryUpdated);
 
@@ -14,14 +14,18 @@ class APE_INVENTORY_API UInventoryComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:
-	bool AddItem(class UItem* item);
-	bool RemoveItem(class UItem* item);
+	UFUNCTION(BlueprintCallable)
+	bool AddItem(UItem* item);
+
+	UFUNCTION(BlueprintCallable)
+	bool RemoveItem(UItem* item);
 
 	//Find item
-	class UItem* FindItem(class UItem* item, int32& index);
+	UFUNCTION(BlueprintCallable)
+	UItem* FindItem(UItem* item, int32& index);
 
 	UPROPERTY(EditDefaultsOnly, Instanced)
-	TArray<class UItem*> Items;
+	TArray<UItem*> Items;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
 	int32 Size = 20;
@@ -30,7 +34,7 @@ public:
 	FOnInventoryUpdated OnInventoryUpdated;
 
 	UPROPERTY(EditDefaultsOnly, Instanced)
-	TArray<class UItem*> DefaultItems;
+	TArray<UItem*> DefaultItems;
 
 protected:
 	// Called when the game starts
