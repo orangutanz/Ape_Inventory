@@ -38,4 +38,7 @@ struct FMaterialInfo
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
 	class UStaticMesh* Mesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item", meta = (ClampMin = 0))
+	int32 maxStack = 64;
 };

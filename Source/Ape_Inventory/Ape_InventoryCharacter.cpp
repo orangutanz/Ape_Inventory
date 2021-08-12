@@ -59,6 +59,8 @@ AApe_InventoryCharacter::AApe_InventoryCharacter()
 	// Activate ticking in order to update the cursor every frame.
 	PrimaryActorTick.bCanEverTick = true;
 	PrimaryActorTick.bStartWithTickEnabled = true;
+
+
 }
 
 void AApe_InventoryCharacter::Tick(float DeltaSeconds)

@@ -16,4 +16,7 @@ AApe_InventoryGameMode::AApe_InventoryGameMode()
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	}
+
+
 }
+

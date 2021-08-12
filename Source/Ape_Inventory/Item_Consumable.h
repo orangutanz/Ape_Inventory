@@ -55,9 +55,12 @@ struct FConsumableInfo
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
 	class UStaticMesh* Mesh;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
 	int32 regenAmount = 0;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item", meta = (ClampMin = 0))
+	int32 maxStack = 64;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
 	TEnumAsByte<ConsumableType> ConsumableType;
 };
