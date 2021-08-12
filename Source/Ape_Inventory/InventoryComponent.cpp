@@ -1,6 +1,8 @@
 #include "InventoryComponent.h"
 #include "Item.h"
 
+
+
 bool UInventoryComponent::AddItem(UItem* item)
 {
 	if (item)
@@ -57,7 +59,7 @@ bool UInventoryComponent::AddItem(UItem* item)
 			else if ((p + q) <= s) // If the item can be added within a stack
 			{
 				itemFound->Quantity = p + q;
-				item->~UItem();
+				item->Quantity = 0;
 
 				OnInventoryUpdated.Broadcast();
 				return true;
@@ -84,6 +86,14 @@ bool UInventoryComponent::AddItem(UItem* item)
 
 bool UInventoryComponent::RemoveItem(UItem* item)
 {
+	if (item)
+	{
+		item->OwnerInventory = nullptr;
+		Items.RemoveSingle(item);
+
+		OnInventoryUpdated.Broadcast();
+		return true;
+	}
 	return false;
 }
 
@@ -104,9 +114,19 @@ UItem* UInventoryComponent::FindItem(UItem* item, int32& index)
 	return nullptr;
 }
 
+
+
 void UInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	
+
+	Items.Reserve(Size);
+
+	for (auto& item : DefaultItems)
+	{
+		Items.Add(item);
+	}
+
+	OnInventoryUpdated.Broadcast();
 }
 

@@ -14,7 +14,6 @@ class APE_INVENTORY_API UInventoryComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:
-
 	bool AddItem(class UItem* item);
 	bool RemoveItem(class UItem* item);
 
@@ -25,7 +24,7 @@ public:
 	TArray<class UItem*> Items;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
-	int32 Size;
+	int32 Size = 20;
 
 	UPROPERTY(BlueprintAssignable, Category = "Inventory")
 	FOnInventoryUpdated OnInventoryUpdated;
