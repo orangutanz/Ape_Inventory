@@ -6,7 +6,7 @@
 
 class AApe_InventoryCharacter;
 
-UCLASS()
+UCLASS(BlueprintType)
 class APE_INVENTORY_API UItem_Equipment : public UItem
 {
 	GENERATED_BODY()
@@ -25,7 +25,7 @@ public:
 	int32 curDurability = 300;
 
 protected:
-	virtual void Use(class AApe_InventoryCharacter* character) override;
+	virtual void Use(AApe_InventoryCharacter* character) override;
 	
 };
 

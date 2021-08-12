@@ -1,5 +1,3 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
 #pragma once
 
 #include "CoreMinimal.h"
@@ -15,10 +13,10 @@ enum ConsumableType
 	Health      UMETA(DisplayName = "Health"),
 	Mana		UMETA(DisplayName = "Mana"),
 	Stamina     UMETA(DisplayName = "Stamina"),
-	Other       UMETA(DisplayName = "Other")
+	OtherConsumable       UMETA(DisplayName = "OtherConsumable")
 };
 
-UCLASS()
+UCLASS(BlueprintType)
 class APE_INVENTORY_API UItem_Consumable : public UItem
 {
 	GENERATED_BODY()
