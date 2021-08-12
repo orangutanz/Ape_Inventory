@@ -12,10 +12,10 @@ UENUM(BlueprintType)
 enum ConsumableType
 {
 	Food        UMETA(DisplayName = "Food"),
-	Health       UMETA(DisplayName = "Health"),
-	Mana     UMETA(DisplayName = "Mana"),
+	Health      UMETA(DisplayName = "Health"),
+	Mana		UMETA(DisplayName = "Mana"),
 	Stamina     UMETA(DisplayName = "Stamina"),
-	Other        UMETA(DisplayName = "Other")
+	Other       UMETA(DisplayName = "Other")
 };
 
 UCLASS()
@@ -32,4 +32,34 @@ public:
 
 protected:
 	virtual void Use(class AApe_InventoryCharacter* character) override;
+};
+
+USTRUCT(BlueprintType)
+struct FConsumableInfo
+{
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
+	FName itemID;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
+	FText Name;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item", meta = (MultiLine = true))
+	FText Description;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Item")
+	TEnumAsByte<ItemType> itemType = ItemType::Consumable;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
+	class UTexture2D* Icon;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
+	class UStaticMesh* Mesh;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
+	int32 regenAmount = 0;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
+	TEnumAsByte<ConsumableType> ConsumableType;
 };

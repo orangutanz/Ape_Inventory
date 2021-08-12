@@ -28,3 +28,37 @@ protected:
 	virtual void Use(class AApe_InventoryCharacter* character) override;
 	
 };
+
+//this is what data will be stored and pulled from
+USTRUCT(BlueprintType)
+struct FEquipmentInfo
+{
+	GENERATED_USTRUCT_BODY()
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
+	FName itemID;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
+	FText Name;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item", meta = (MultiLine = true))
+	FText Description;
+
+	UPROPERTY(BlueprintReadOnly, Category = "Item")
+	TEnumAsByte<ItemType> itemType = ItemType::Equipment;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
+	class UTexture2D* Icon;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
+	class UStaticMesh* Mesh;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
+	int32 Damage;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item")
+	int32 Defense;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Item", meta = (ClampMin = 0))
+	int32 maxDurability;
+};
