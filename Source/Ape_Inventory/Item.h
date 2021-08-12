@@ -24,6 +24,8 @@ class APE_INVENTORY_API UItem : public UObject
 	GENERATED_BODY()
 
 public:
+	UItem();
+	~UItem();
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
 	FName itemID;

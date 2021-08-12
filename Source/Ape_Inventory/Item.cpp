@@ -3,3 +3,12 @@
 
 #include "Item.h"
 
+UItem::UItem()
+{
+
+}
+
+UItem::~UItem()
+{
+	OwnerInventory = nullptr;
+}
