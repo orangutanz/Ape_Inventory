@@ -2,6 +2,7 @@
 
 
 #include "Item.h"
+#include "InventoryComponent.h"
 
 UItem::UItem()
 {

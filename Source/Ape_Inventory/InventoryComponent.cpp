@@ -9,7 +9,7 @@ UInventoryComponent::UInventoryComponent()
 
 bool UInventoryComponent::AddItem(UItem* item)
 {
-	if (item)
+	if (!item)
 	{
 		return false;
 	}
@@ -51,38 +51,39 @@ bool UInventoryComponent::AddItem(UItem* item)
 	}
 	else // If there're same items in the inventory already
 	{
-		while (item->Quantity > 0 && (foundIndex >= 0 && foundIndex < Size))
+		while (itemFound && (item->Quantity > 0))
 		{
 			int32 q = itemFound->Quantity;
-			int32 s = itemFound->maxStack;
+			int32 m = itemFound->maxStack;
 			int32 p = item->Quantity;
-			if (q == s) // If the item stack is full, find the next item.
+			if (q == m) // If the item stack is full, find the next item.
 			{
 				itemFound = FindItem(item, ++foundIndex);
 			}
-			else if ((p + q) <= s) // If the item can be added within a stack
+			else if ((p + q) <= m) // If the item can be added within a stack
 			{
 				itemFound->Quantity = p + q;
 				item->Quantity = 0;
+				item->OwnerInventory = nullptr;
 
 				OnInventoryUpdated.Broadcast();
 				return true;
 			}
-			else if ((p + q) > s) // If the item added will be more than max stack
+			else if ((p + q) > m) // If the item added will be more than max stack
 			{
-				itemFound->Quantity = p + q;
-				item->Quantity = q - (s - p);
-
+				itemFound->Quantity = m;
+				item->Quantity = p - (m - q);
 				itemFound = FindItem(item, ++foundIndex);
 			}
-			else if (Items.Num() < Size)
-			{
-				Items.Add(item);
-				item->OwnerInventory = this;
+		}
+		//there're same items but can't be stacked. still add item if there's a space
+		if ((item->Quantity > 0) && (Items.Num() < Size))
+		{
+			Items.Add(item);
+			item->OwnerInventory = this;
 
-				OnInventoryUpdated.Broadcast();
-				return true;
-			}
+			OnInventoryUpdated.Broadcast();
+			return true;
 		}
 	}
 	return false;
@@ -126,7 +127,7 @@ void UInventoryComponent::BeginPlay()
 
 	for (auto& item : DefaultItems)
 	{
-		Items.Add(item);
+		AddItem(item);
 	}
 
 	OnInventoryUpdated.Broadcast();
