@@ -101,6 +101,7 @@ bool UInventoryComponent::RemoveItem(UItem* item)
 	return false;
 }
 
+
 UItem* UInventoryComponent::FindItem(UItem* item, int32& index)
 {
 	if (item && (index < 0 || index >= Size))
