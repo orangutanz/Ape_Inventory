@@ -50,7 +50,7 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item", meta = (ClampMin = 0))
 	int32 Quantity = 1;
 
-	UPROPERTY()
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
 	class UInventoryComponent* OwnerInventory;
 
 	virtual void Use(AApe_InventoryCharacter* Character) PURE_VIRTUAL(UItem, );

@@ -22,6 +22,10 @@ bool UInventoryComponent::AddItem(UItem* item)
 		}
 		else // add the item if there's a slot in the inventory
 		{
+			if (item->OwnerInventory)
+			{
+				item->OwnerInventory->RemoveItem(item);
+			}
 			Items.Add(item);
 			item->OwnerInventory = this;
 
@@ -42,6 +46,10 @@ bool UInventoryComponent::AddItem(UItem* item)
 		}
 		else // Add the item if there's a slot in the inventory
 		{
+			if (item->OwnerInventory)
+			{
+				item->OwnerInventory->RemoveItem(item);
+			}
 			Items.Add(item);
 			item->OwnerInventory = this;
 
@@ -79,6 +87,10 @@ bool UInventoryComponent::AddItem(UItem* item)
 		//there're same items but can't be stacked. still add item if there's a space
 		if ((item->Quantity > 0) && (Items.Num() < Size))
 		{
+			if (item->OwnerInventory)
+			{
+				item->OwnerInventory->RemoveItem(item);
+			}
 			Items.Add(item);
 			item->OwnerInventory = this;
 
