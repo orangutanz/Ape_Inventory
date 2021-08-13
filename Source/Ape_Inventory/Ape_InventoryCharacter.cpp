@@ -1,6 +1,7 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
 #include "Ape_InventoryCharacter.h"
+#include "Item.h"
 #include "InventoryComponent.h"
 #include "UObject/ConstructorHelpers.h"
 #include "Camera/CameraComponent.h"
@@ -44,6 +45,7 @@ AApe_InventoryCharacter::AApe_InventoryCharacter()
 
 	// Create invnetory
 	Inventory = CreateDefaultSubobject<UInventoryComponent>("Inventory");
+	Inventory->Size = 20;
 
 	// Create a decal in the world to show the cursor's location
 	CursorToWorld = CreateDefaultSubobject<UDecalComponent>("CursorToWorld");
@@ -93,4 +95,10 @@ void AApe_InventoryCharacter::Tick(float DeltaSeconds)
 			CursorToWorld->SetWorldRotation(CursorR);
 		}
 	}
+}
+
+void AApe_InventoryCharacter::UseItem(UItem* item)
+{
+	item->Use(this);
+	item->OnUse(this); // BP event
 }

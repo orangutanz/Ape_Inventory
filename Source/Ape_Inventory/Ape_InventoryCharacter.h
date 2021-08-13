@@ -17,12 +17,20 @@ public:
 	// Called every frame.
 	virtual void Tick(float DeltaSeconds) override;
 
+	UPROPERTY(EditAnywhere, BlueprintReadwrite, Category = "Health")
+	int32 health = 100;
+
+	UFUNCTION(BlueprintCallable, Category = "Item")
+	void UseItem(class UItem* item);
+
+public:
 	/** Returns TopDownCameraComponent subobject **/
 	FORCEINLINE class UCameraComponent* GetTopDownCameraComponent() const { return TopDownCameraComponent; }
 	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns CursorToWorld subobject **/
 	FORCEINLINE class UDecalComponent* GetCursorToWorld() { return CursorToWorld; }
+
 
 private:
 	/** Top down camera */

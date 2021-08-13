@@ -1,7 +1,11 @@
 #include "InventoryComponent.h"
 #include "Item.h"
 
+UInventoryComponent::UInventoryComponent()
+{
+	Items.Reserve(Size);
 
+}
 
 bool UInventoryComponent::AddItem(UItem* item)
 {
@@ -118,8 +122,6 @@ UItem* UInventoryComponent::FindItem(UItem* item, int32& index)
 void UInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
-	Items.Reserve(Size);
 
 	for (auto& item : DefaultItems)
 	{

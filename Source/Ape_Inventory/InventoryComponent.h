@@ -14,6 +14,8 @@ class APE_INVENTORY_API UInventoryComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:
+	UInventoryComponent();
+
 	UFUNCTION(BlueprintCallable)
 	bool AddItem(UItem* item);
 
@@ -24,7 +26,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	UItem* FindItem(UItem* item, int32& index);
 
-	UPROPERTY(EditDefaultsOnly, Instanced)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory")
 	TArray<UItem*> Items;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Inventory")
