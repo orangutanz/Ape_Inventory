@@ -14,3 +14,7 @@ UItem::~UItem()
 	Quantity = 0;
 	OwnerInventory = nullptr;
 }
+
+void UItem::Use(AApe_InventoryCharacter* Character)
+{
+}
