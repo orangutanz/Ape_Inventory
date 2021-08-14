@@ -13,7 +13,7 @@ void UItem_Consumable::Use(AApe_InventoryCharacter* character)
 		}
 		if (OwnerInventory && Quantity == 0)
 		{
-			OwnerInventory->RemoveItem(this);
+			OwnerInventory->DeleteItem(this);
 		}
 	}
 }

@@ -105,13 +105,23 @@ bool UInventoryComponent::RemoveItem(UItem* item)
 {
 	if (item)
 	{
-		item->OwnerInventory = nullptr;
 		Items.RemoveSingle(item);
 
 		OnInventoryUpdated.Broadcast();
 		return true;
 	}
 	return false;
+}
+
+void UInventoryComponent::DeleteItem(UItem* item)
+{
+	if (item)
+	{
+		item->OwnerInventory = nullptr;
+		Items.RemoveSingle(item);
+
+		OnInventoryUpdated.Broadcast();
+	}
 }
 
 

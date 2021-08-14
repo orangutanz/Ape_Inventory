@@ -22,6 +22,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool RemoveItem(UItem* item);
 
+	UFUNCTION(BlueprintCallable)
+	void DeleteItem(UItem* item);
+
 	//Find item
 	UFUNCTION(BlueprintCallable)
 	UItem* FindItem(UItem* item, int32& index);

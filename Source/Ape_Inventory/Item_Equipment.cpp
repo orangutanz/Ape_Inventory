@@ -15,7 +15,7 @@ void UItem_Equipment::Use(class AApe_InventoryCharacter* character)
 			}
 			else
 			{
-				OwnerInventory->RemoveItem(this);
+				OwnerInventory->DeleteItem(this);
 			}
 		}
 	}
