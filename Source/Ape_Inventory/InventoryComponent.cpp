@@ -71,8 +71,10 @@ bool UInventoryComponent::AddItem(UItem* item)
 			else if ((p + q) <= m) // If the item can be added within a stack
 			{
 				itemFound->Quantity = p + q;
-				item->Quantity = 0;
-				item->OwnerInventory = nullptr;
+				if (item->OwnerInventory)
+				{
+					item->OwnerInventory->DeleteItem(item);
+				}
 
 				OnInventoryUpdated.Broadcast();
 				return true;
@@ -84,7 +86,7 @@ bool UInventoryComponent::AddItem(UItem* item)
 				itemFound = FindItem(item, ++foundIndex);
 			}
 		}
-		//there're same items but can't be stacked. still add item if there's a space
+		//after all, still add the item if there's a space
 		if ((item->Quantity > 0) && (Items.Num() < Size))
 		{
 			if (item->OwnerInventory)
@@ -122,6 +124,22 @@ void UInventoryComponent::DeleteItem(UItem* item)
 
 		OnInventoryUpdated.Broadcast();
 	}
+}
+
+
+bool UInventoryComponent::TransferItemTo(UItem* item, UInventoryComponent* to)
+{
+	if (item && to)
+	{
+		UInventoryComponent* originalOwner = item->OwnerInventory;
+		if (to->AddItem(item))
+		{
+			originalOwner->Items.RemoveSingle(item);
+			return true;
+		}
+		OnInventoryUpdated.Broadcast();
+	}
+	return false;
 }
 
 

@@ -25,6 +25,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void DeleteItem(UItem* item);
 
+	UFUNCTION(BlueprintCallable)
+	bool TransferItemTo(UItem* item, UInventoryComponent* to);
+
 	//Find item
 	UFUNCTION(BlueprintCallable)
 	UItem* FindItem(UItem* item, int32& index);
