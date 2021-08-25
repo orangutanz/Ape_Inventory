@@ -142,6 +142,10 @@ bool UInventoryComponent::TransferItemTo(UItem* item, UInventoryComponent* to)
 	return false;
 }
 
+void UInventoryComponent::SortItems()
+{
+}
+
 
 UItem* UInventoryComponent::FindItem(UItem* item, int32& index)
 {

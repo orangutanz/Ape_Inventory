@@ -28,6 +28,9 @@ public:
 	UFUNCTION(BlueprintCallable)
 	bool TransferItemTo(UItem* item, UInventoryComponent* to);
 
+	UFUNCTION(BlueprintCallable)
+	void SortItems();
+
 	//Find item
 	UFUNCTION(BlueprintCallable)
 	UItem* FindItem(UItem* item, int32& index);
