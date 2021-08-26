@@ -30,7 +30,7 @@ public:
 	~UItem();
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
-	FName itemID;
+	FName ItemID;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
 	FText Name;
@@ -39,13 +39,13 @@ public:
 	FText Description;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
-	TEnumAsByte<ItemType> itemType;
+	TEnumAsByte<ItemType> ItemType;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
 	class UTexture2D* Icon;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item", meta = (ClampMin = 0))
-	int32 maxStack = 1;
+	int32 MaxStack = 1;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item", meta = (ClampMin = 0))
 	int32 Quantity = 1;

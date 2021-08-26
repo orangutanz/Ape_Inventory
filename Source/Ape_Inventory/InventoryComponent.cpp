@@ -14,7 +14,7 @@ bool UInventoryComponent::AddItem(UItem* item)
 		return false;
 	}
 	// if the item can not be stacked
-	if (item->maxStack == 1)
+	if (item->MaxStack == 1)
 	{
 		if (Items.Num() >= Size)
 		{
@@ -62,7 +62,7 @@ bool UInventoryComponent::AddItem(UItem* item)
 		while (itemFound && (item->Quantity > 0))
 		{
 			int32 q = itemFound->Quantity;
-			int32 m = itemFound->maxStack;
+			int32 m = itemFound->MaxStack;
 			int32 p = item->Quantity;
 			if (q == m) // If the item stack is full, find the next item.
 			{
@@ -156,7 +156,7 @@ UItem* UInventoryComponent::FindItem(UItem* item, int32& index)
 
 	for (index; index <Items.Num(); index++)
 	{
-		if (item->itemID == Items[index]->itemID)
+		if (item->ItemID == Items[index]->ItemID)
 		{
 			return  Items[index];
 		}
