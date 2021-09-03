@@ -29,7 +29,7 @@ public:
 	bool TransferItemTo(UItem* item, UInventoryComponent* to);
 
 	UFUNCTION(BlueprintCallable)
-	void SortItems();
+	void SortItems(){}
 
 	//Find item
 	UFUNCTION(BlueprintCallable)
@@ -46,6 +46,9 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, Instanced)
 	TArray<UItem*> DefaultItems;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
+	float SpawnRating = 1.0f;
 
 protected:
 	// Called when the game starts

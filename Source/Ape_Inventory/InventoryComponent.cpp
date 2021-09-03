@@ -1,10 +1,10 @@
 #include "InventoryComponent.h"
 #include "Item.h"
+#include <cstdlib>
 
 UInventoryComponent::UInventoryComponent()
 {
 	Items.Reserve(Size);
-
 }
 
 bool UInventoryComponent::AddItem(UItem* item)
@@ -142,10 +142,6 @@ bool UInventoryComponent::TransferItemTo(UItem* item, UInventoryComponent* to)
 	return false;
 }
 
-void UInventoryComponent::SortItems()
-{
-}
-
 
 UItem* UInventoryComponent::FindItem(UItem* item, int32& index)
 {
@@ -169,9 +165,23 @@ void UInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
-	for (auto& item : DefaultItems)
+	if (SpawnRating == 1.0f)
 	{
-		AddItem(item);
+		for (auto& item : DefaultItems)
+		{
+			AddItem(item);
+		}
+	}
+	else
+	{
+		for (auto& item : DefaultItems)
+		{
+			float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+			if (r < SpawnRating)
+			{
+				AddItem(item);
+			}
+		}
 	}
 
 	OnInventoryUpdated.Broadcast();
