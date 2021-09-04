@@ -29,6 +29,9 @@ public:
 	bool TransferItemTo(UItem* item, UInventoryComponent* to);
 
 	UFUNCTION(BlueprintCallable)
+	bool TransferAllItemsTo(UInventoryComponent* to);
+
+	UFUNCTION(BlueprintCallable)
 	void SortItems(){}
 
 	//Find item

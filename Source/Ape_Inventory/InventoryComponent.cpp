@@ -142,6 +142,21 @@ bool UInventoryComponent::TransferItemTo(UItem* item, UInventoryComponent* to)
 	return false;
 }
 
+bool UInventoryComponent::TransferAllItemsTo(UInventoryComponent* to)
+{
+	if (!to)
+	{
+		return false;
+	}
+
+	for (int i = Items.Num() - 1; i >= 0; --i)
+	{
+		to->AddItem(Items[i]);
+	}
+
+	OnInventoryUpdated.Broadcast();
+	return false;
+}
 
 UItem* UInventoryComponent::FindItem(UItem* item, int32& index)
 {
