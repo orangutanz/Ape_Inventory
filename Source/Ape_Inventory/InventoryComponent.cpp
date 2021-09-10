@@ -126,6 +126,17 @@ void UInventoryComponent::DeleteItem(UItem* item)
 	}
 }
 
+bool UInventoryComponent::SwapItemByIndex(const int32 a, const int32 b)
+{
+	if ((a >= 0 && a < Items.Num()) && (b >= 0 && b < Items.Num()) && (a != b))
+	{
+		Items.Swap(a, b);
+		OnInventoryUpdated.Broadcast();
+		return true;
+	}
+	return false;
+}
+
 
 bool UInventoryComponent::TransferItemTo(UItem* item, UInventoryComponent* to)
 {
@@ -157,6 +168,14 @@ bool UInventoryComponent::TransferAllItemsTo(UInventoryComponent* to)
 	OnInventoryUpdated.Broadcast();
 	return false;
 }
+
+void UInventoryComponent::SortItems()
+{	
+	Items.Sort([](const UItem& a, const UItem& b) { return a.ItemID < b.ItemID; });
+
+	OnInventoryUpdated.Broadcast();
+}
+
 
 UItem* UInventoryComponent::FindItem(UItem* item, int32& index)
 {

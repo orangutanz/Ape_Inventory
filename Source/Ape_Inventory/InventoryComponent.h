@@ -8,6 +8,8 @@ class UItem;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryUpdated);
 
+
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class APE_INVENTORY_API UInventoryComponent : public UActorComponent
 {
@@ -26,13 +28,16 @@ public:
 	void DeleteItem(UItem* item);
 
 	UFUNCTION(BlueprintCallable)
+	bool SwapItemByIndex(const int32 a, const int32 b);
+
+	UFUNCTION(BlueprintCallable)
 	bool TransferItemTo(UItem* item, UInventoryComponent* to);
 
 	UFUNCTION(BlueprintCallable)
 	bool TransferAllItemsTo(UInventoryComponent* to);
 
 	UFUNCTION(BlueprintCallable)
-	void SortItems(){}
+	void SortItems();
 
 	//Find item
 	UFUNCTION(BlueprintCallable)
