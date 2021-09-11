@@ -60,4 +60,7 @@ public:
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnUse(AApe_InventoryCharacter* Character);
+
+	UFUNCTION(BlueprintCallable)
+	UItem* SplitItem(int32 num);
 };

@@ -171,7 +171,7 @@ bool UInventoryComponent::TransferAllItemsTo(UInventoryComponent* to)
 
 void UInventoryComponent::SortItems()
 {	
-	Items.Sort([](const UItem& a, const UItem& b) { return a.ItemID < b.ItemID; });
+	Items.Sort([](const UItem& a, const UItem& b) { return a.ItemID.FastLess(b.ItemID); });
 
 	OnInventoryUpdated.Broadcast();
 }
