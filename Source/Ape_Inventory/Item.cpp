@@ -30,6 +30,7 @@ UItem* UItem::SplitItem(int32 num)
 	{
 		Quantity -= num;
 		auto item = NewObject<UItem>();
+		//auto item = CreateDefaultSubobject<UItem>(TEXT("SubClassItem")); also broken. problem might be somewhere else
 		item->ItemID = ItemID;
 		item->Name = Name;
 		item->Description = Description;
