@@ -22,12 +22,7 @@ bool UInventoryComponent::AddItem(UItem* item)
 		}
 		else // add the item if there's a slot in the inventory
 		{
-			if (item->OwnerInventory)
-			{
-				item->OwnerInventory->RemoveItem(item);
-			}
 			Items.Add(item);
-			item->OwnerInventory = this;
 
 			OnInventoryUpdated.Broadcast();
 			return true;
@@ -46,12 +41,7 @@ bool UInventoryComponent::AddItem(UItem* item)
 		}
 		else // Add the item if there's a slot in the inventory
 		{
-			if (item->OwnerInventory)
-			{
-				item->OwnerInventory->RemoveItem(item);
-			}
 			Items.Add(item);
-			item->OwnerInventory = this;
 
 			OnInventoryUpdated.Broadcast();
 			return true;
@@ -71,10 +61,6 @@ bool UInventoryComponent::AddItem(UItem* item)
 			else if ((p + q) <= m) // If the item can be added within a stack
 			{
 				itemFound->Quantity = p + q;
-				if (item->OwnerInventory)
-				{
-					item->OwnerInventory->DeleteItem(item);
-				}
 
 				OnInventoryUpdated.Broadcast();
 				return true;
@@ -89,12 +75,7 @@ bool UInventoryComponent::AddItem(UItem* item)
 		//after all, still add the item if there's a space
 		if ((item->Quantity > 0) && (Items.Num() < Size))
 		{
-			if (item->OwnerInventory)
-			{
-				item->OwnerInventory->RemoveItem(item);
-			}
 			Items.Add(item);
-			item->OwnerInventory = this;
 
 			OnInventoryUpdated.Broadcast();
 			return true;
@@ -115,17 +96,6 @@ bool UInventoryComponent::RemoveItem(UItem* item)
 	return false;
 }
 
-void UInventoryComponent::DeleteItem(UItem* item)
-{
-	if (item)
-	{
-		item->OwnerInventory = nullptr;
-		Items.RemoveSingle(item);
-
-		OnInventoryUpdated.Broadcast();
-	}
-}
-
 bool UInventoryComponent::SwapItemByIndex(const int32 a, const int32 b)
 {
 	if ((a >= 0 && a < Items.Num()) && (b >= 0 && b < Items.Num()) && (a != b))
@@ -142,10 +112,9 @@ bool UInventoryComponent::TransferItemTo(UItem* item, UInventoryComponent* to)
 {
 	if (item && to)
 	{
-		UInventoryComponent* originalOwner = item->OwnerInventory;
 		if (to->AddItem(item))
 		{
-			originalOwner->Items.RemoveSingle(item);
+			Items.RemoveSingle(item);
 			return true;
 		}
 		OnInventoryUpdated.Broadcast();
@@ -171,7 +140,12 @@ bool UInventoryComponent::TransferAllItemsTo(UInventoryComponent* to)
 
 void UInventoryComponent::SortItems()
 {	
-	Items.Sort([](const UItem& a, const UItem& b) { return a.ItemID.FastLess(b.ItemID); });
+	//ItemID sort
+	//Items.Sort([](const UItem& a, const UItem& b) { return a.ItemID.FastLess(b.ItemID); });
+
+	//Type sort
+	Items.Sort([](const UItem& a, const UItem& b) { return a.ItemType <= b.ItemType; });
+
 
 	OnInventoryUpdated.Broadcast();
 }

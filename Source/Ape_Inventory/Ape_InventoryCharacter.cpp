@@ -99,6 +99,4 @@ void AApe_InventoryCharacter::Tick(float DeltaSeconds)
 
 void AApe_InventoryCharacter::UseItem(UItem* item)
 {
-	item->Use(this);
-	item->OnUse(this); // BP event
 }

@@ -11,12 +11,7 @@ UItem::UItem()
 
 UItem::~UItem()
 {
-	Quantity = 0;
-	OwnerInventory = nullptr;
-}
 
-void UItem::Use(AApe_InventoryCharacter* Character)
-{
 }
 
 UItem* UItem::SplitItem(int32 num)
@@ -30,7 +25,6 @@ UItem* UItem::SplitItem(int32 num)
 	{
 		Quantity -= num;
 		auto item = NewObject<UItem>();
-		//auto item = CreateDefaultSubobject<UItem>(TEXT("SubClassItem")); also broken. problem might be somewhere else
 		item->ItemID = ItemID;
 		item->ItemType = ItemType;
 		item->MaxStack = MaxStack;
