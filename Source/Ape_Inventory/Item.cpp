@@ -21,7 +21,7 @@ void UItem::Use(AApe_InventoryCharacter* Character)
 
 UItem* UItem::SplitItem(int32 num)
 {
-	if (MaxStack == 1)
+	if (MaxStack == 1 || num == 0)
 	{
 		return nullptr;
 	}
@@ -32,11 +32,7 @@ UItem* UItem::SplitItem(int32 num)
 		auto item = NewObject<UItem>();
 		//auto item = CreateDefaultSubobject<UItem>(TEXT("SubClassItem")); also broken. problem might be somewhere else
 		item->ItemID = ItemID;
-		item->Name = Name;
-		item->Description = Description;
 		item->ItemType = ItemType;
-		item->Mesh = Mesh;
-		item->Icon = Icon;
 		item->MaxStack = MaxStack;
 		item->Quantity = num;
 

@@ -11,10 +11,10 @@ class AApe_InventoryCharacter;
 UENUM(BlueprintType)
 enum ItemType
 {
-	Equipment        UMETA(DisplayName = "Equipment"),
 	Consumable       UMETA(DisplayName = "Consumable"),
-	MaterialItem     UMETA(DisplayName = "MaterialItem"),
 	Container        UMETA(DisplayName = "Container"),
+	Equipment        UMETA(DisplayName = "Equipment"),
+	Material		 UMETA(DisplayName = "Material"),
 	Miscellaneous    UMETA(DisplayName = "Miscellaneous")
 };
 /**
@@ -32,20 +32,8 @@ public:
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
 	FName ItemID;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item")
-	FText Name;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item", meta = (MultiLine = true))
-	FText Description;
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
 	TEnumAsByte<ItemType> ItemType;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
-	class UStaticMesh* Mesh;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
-	class UTexture2D* Icon;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item", meta = (ClampMin = 0))
 	int32 MaxStack = 1;
