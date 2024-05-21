@@ -49,18 +49,11 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Inventory")
 	TArray<UItem*> Items;
 
-
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Inventory")
 	int32 Size = 20;
 
 	UPROPERTY(BlueprintAssignable, Category = "Inventory")
 	FOnInventoryUpdated OnInventoryUpdated;
-
-	UPROPERTY(EditDefaultsOnly, Instanced)
-	TArray<UItem*> DefaultItems;
-
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	float SpawnRating = 1.0f;
 
 protected:
 	// Called when the game starts

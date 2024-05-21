@@ -16,6 +16,7 @@ enum ItemType
 	Equipment        UMETA(DisplayName = "Equipment"),
 	Misc		     UMETA(DisplayName = "Misc")
 };
+
 /**
  * 
  */

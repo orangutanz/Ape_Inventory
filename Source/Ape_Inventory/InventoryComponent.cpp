@@ -172,26 +172,5 @@ UItem* UInventoryComponent::FindItem(UItem* item, int32& index)
 void UInventoryComponent::BeginPlay()
 {
 	Super::BeginPlay();
-
-	if (SpawnRating == 1.0f)
-	{
-		for (auto& item : DefaultItems)
-		{
-			AddItem(item);
-		}
-	}
-	else
-	{
-		for (auto& item : DefaultItems)
-		{
-			float r = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
-			if (r < SpawnRating)
-			{
-				AddItem(item);
-			}
-		}
-	}
-
-	OnInventoryUpdated.Broadcast();
 }
 
