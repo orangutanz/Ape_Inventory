@@ -4,35 +4,38 @@
 #include "Item.h"
 #include "InventoryComponent.h"
 
-UItem::UItem()
+void UItem::InitItemInfo(FItemInfo info)
 {
-
+	mItemInfo = info;
 }
 
-UItem::~UItem()
+bool UItem::SetQuantity(int32 num)
 {
+	if (num == 0 || num > mItemInfo.MaxStack)
+		return false;
 
+	mItemInfo.Quantity = num;
+	return true;
 }
 
 UItem* UItem::SplitItem(int32 num)
 {
-	if (MaxStack == 1 || num == 0)
+	if (mItemInfo.MaxStack == 1 || num == 0)
 	{
 		return nullptr;
 	}
 
-	if (Quantity > num)
+	if (mItemInfo.Quantity > num)
 	{
-		Quantity -= num;
-		auto item = NewObject<UItem>();
-		item->ItemID = ItemID;
-		item->ItemType = ItemType;
-		item->MaxStack = MaxStack;
-		item->Quantity = num;
+		FItemInfo newInfo = mItemInfo;
+		newInfo.Quantity = num;
+		mItemInfo.Quantity -= num;
+		auto newItem = NewObject<UItem>();
+		newItem->InitItemInfo(newInfo);		
 
-		return item;
+		return newItem;
 	}
-	else if (Quantity == num)
+	else if (mItemInfo.Quantity == num)
 	{
 		return this;
 	}

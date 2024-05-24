@@ -14,7 +14,7 @@ bool UInventoryComponent::AddItem(UItem* item)
 		return false;
 	}
 	// if the item can not be stacked
-	if (item->MaxStack == 1)
+	if (item->GetMaxStack() == 1)
 	{
 		if (Items.Num() >= Size)
 		{
@@ -49,31 +49,31 @@ bool UInventoryComponent::AddItem(UItem* item)
 	}
 	else // If there're same items in the inventory already
 	{
-		while (itemFound && (item->Quantity > 0))
+		while (itemFound && (item->GetQuantity() > 0))
 		{
-			int32 q = itemFound->Quantity;
-			int32 m = itemFound->MaxStack;
-			int32 p = item->Quantity;
+			int32 q = itemFound->GetQuantity();
+			int32 m = itemFound->GetMaxStack();
+			int32 p = item->GetQuantity();
 			if (q == m) // If the item stack is full, find the next item.
 			{
 				itemFound = FindItem(item, ++foundIndex);
 			}
 			else if ((p + q) <= m) // If the item can be added within a stack
 			{
-				itemFound->Quantity = p + q;
+				itemFound->SetQuantity(p + q);
 
 				OnInventoryUpdated.Broadcast();
 				return true;
 			}
 			else if ((p + q) > m) // If the item added will be more than max stack
 			{
-				itemFound->Quantity = m;
-				item->Quantity = p - (m - q);
+				itemFound->SetQuantity(m);
+				item->SetQuantity(p - (m - q));
 				itemFound = FindItem(item, ++foundIndex);
 			}
 		}
 		//after all, still add the item if there's a space
-		if ((item->Quantity > 0) && (Items.Num() < Size))
+		if ((item->GetQuantity() > 0) && (Items.Num() < Size))
 		{
 			Items.Add(item);
 
@@ -140,12 +140,11 @@ bool UInventoryComponent::TransferAllItemsTo(UInventoryComponent* to)
 
 void UInventoryComponent::SortItems()
 {	
-	//ItemID sort
-	//Items.Sort([](const UItem& a, const UItem& b) { return a.ItemID.FastLess(b.ItemID); });
+	//ID sort
+	//Items.Sort([](const UItem& a, const UItem& b) { return a.GetItemID().FastLess(b.GetItemID()); });
 
 	//Type sort
-	Items.Sort([](const UItem& a, const UItem& b) { return a.ItemType <= b.ItemType; });
-
+	Items.Sort([](const UItem& a, const UItem& b) { return a.GetItemType() <= b.GetItemType(); });
 
 	OnInventoryUpdated.Broadcast();
 }
@@ -160,7 +159,7 @@ UItem* UInventoryComponent::FindItem(UItem* item, int32& index)
 
 	for (index; index <Items.Num(); index++)
 	{
-		if (item->ItemID == Items[index]->ItemID)
+		if (item->GetItemID() == Items[index]->GetItemID())
 		{
 			return  Items[index];
 		}
