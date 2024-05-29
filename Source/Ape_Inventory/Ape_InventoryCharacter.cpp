@@ -45,7 +45,7 @@ AApe_InventoryCharacter::AApe_InventoryCharacter()
 
 	// Create invnetory
 	Inventory = CreateDefaultSubobject<UInventoryComponent>("Inventory");
-	Inventory->Size = 20;
+	Inventory->MaxSize = 20;
 
 	// Create a decal in the world to show the cursor's location
 	CursorToWorld = CreateDefaultSubobject<UDecalComponent>("CursorToWorld");

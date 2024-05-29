@@ -45,7 +45,7 @@ class APE_INVENTORY_API UItem : public UObject
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Ape_Item")
-	void InitItemInfo(FItemInfo info);
+	void SetItemInfo(FItemInfo info);
 
 	UFUNCTION(BlueprintCallable, Category = "Ape_Item")
 	bool SetQuantity(int32 num);

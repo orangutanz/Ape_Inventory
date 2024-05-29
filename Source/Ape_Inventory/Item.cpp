@@ -4,7 +4,7 @@
 #include "Item.h"
 #include "InventoryComponent.h"
 
-void UItem::InitItemInfo(FItemInfo info)
+void UItem::SetItemInfo(FItemInfo info)
 {
 	mItemInfo = info;
 }
@@ -31,7 +31,7 @@ UItem* UItem::SplitItem(int32 num)
 		newInfo.Quantity = num;
 		mItemInfo.Quantity -= num;
 		auto newItem = NewObject<UItem>();
-		newItem->InitItemInfo(newInfo);		
+		newItem->SetItemInfo(newInfo);
 
 		return newItem;
 	}

@@ -26,23 +26,26 @@ public:
 	bool SwapItemByIndex(const int32 a, const int32 b);
 
 	UFUNCTION(BlueprintCallable, Category = "Ape_Inventory")
-	bool TransferItemTo(UItem* item, UInventoryComponent* to);
+	void SortItems(bool sortByItemID = false);
 
 	UFUNCTION(BlueprintCallable, Category = "Ape_Inventory")
-	bool TransferAllItemsTo(UInventoryComponent* to);
-
-	UFUNCTION(BlueprintCallable, Category = "Ape_Inventory")
-	void SortItems();
+	void TransferItems(UInventoryComponent* toInventory);
 
 	//Find item
 	UFUNCTION(BlueprintCallable, Category = "Ape_Inventory")
-	UItem* FindItem(UItem* item, int32& index);
+	UItem* FindItemID(FName name, int32& index);
 
+	UFUNCTION(BlueprintCallable, Category = "Ape_Inventory")
+	bool Contains(UItem* item, int& index);
+
+	UFUNCTION(BlueprintCallable, Category = "Ape_Inventory")
+	void UpdateInventory() { OnInventoryUpdated.Broadcast(); }
+public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ape_Inventory")
 	TArray<UItem*> Items;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Ape_Inventory")
-	int32 Size = 20;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Ape_Inventory")
+	int32 MaxSize = 20;
 
 	UPROPERTY(BlueprintAssignable, Category = "Ape_Inventory")
 	FOnInventoryUpdated OnInventoryUpdated;
