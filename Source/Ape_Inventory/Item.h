@@ -23,16 +23,16 @@ struct APE_INVENTORY_API FItemInfo
 {
 	GENERATED_BODY()
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Ape_Item")
 	FName ItemID;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item", meta = (ClampMin = 0))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Ape_Item", meta = (ClampMin = 0))
 	int32 MaxStack = 1;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item", meta = (ClampMin = 0))
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Ape_Item", meta = (ClampMin = 0))
 	int32 Quantity = 1;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Ape_Item")
 	TEnumAsByte<EItemType> ItemType;
 
 };
@@ -44,10 +44,10 @@ class APE_INVENTORY_API UItem : public UObject
 	GENERATED_BODY()
 
 public:
-	UFUNCTION(BlueprintCallable, Category = "Item")
+	UFUNCTION(BlueprintCallable, Category = "Ape_Item")
 	void InitItemInfo(FItemInfo info);
 
-	UFUNCTION(BlueprintCallable, Category = "Item")
+	UFUNCTION(BlueprintCallable, Category = "Ape_Item")
 	bool SetQuantity(int32 num);
 
 	//UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
@@ -62,23 +62,23 @@ public:
 	//UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
 	//TEnumAsByte<EItemType> ItemType;
 
-	UFUNCTION(BlueprintCallable, Category = "Item")
+	UFUNCTION(BlueprintCallable, Category = "Ape_Item")
 	FItemInfo GetItemInfo() { return mItemInfo; }
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Item")
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ape_Item")
 	FORCEINLINE FName GetItemID() const { return  mItemInfo.ItemID; }
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Item")
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ape_Item")
 	FORCEINLINE int32 GetMaxStack() const { return mItemInfo.MaxStack; }
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Item")
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ape_Item")
 	FORCEINLINE int32 GetQuantity() const { return mItemInfo.Quantity; }
 
-	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Item")
+	UFUNCTION(BlueprintCallable, BlueprintPure, Category = "Ape_Item")
 	FORCEINLINE TEnumAsByte<EItemType> GetItemType() const { return mItemInfo.ItemType; }
 
 	/** Return null if (num > Quantity) || (MaxStack == 1) || (num == 0)	*/
-	UFUNCTION(BlueprintCallable, Category = "Item")
+	UFUNCTION(BlueprintCallable, Category = "Ape_Item")
 	UItem* SplitItem(int32 num);
 
 private:
