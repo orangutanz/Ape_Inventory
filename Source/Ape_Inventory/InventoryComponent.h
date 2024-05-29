@@ -14,8 +14,6 @@ class APE_INVENTORY_API UInventoryComponent : public UActorComponent
 	GENERATED_BODY()
 
 public:
-	UInventoryComponent();
-
 	UFUNCTION(BlueprintCallable, Category = "Ape_Inventory")
 	bool AddItem(UItem* item);
 
@@ -53,8 +51,6 @@ public:
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
-
-private:
 
 		
 };

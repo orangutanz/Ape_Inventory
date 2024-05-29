@@ -6,7 +6,6 @@
 #include "UObject/NoExportTypes.h"
 #include "Item.generated.h"
 
-class AApe_InventoryCharacter;
 class UInventoryComponent;
 
 UENUM(BlueprintType)
@@ -49,18 +48,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Ape_Item")
 	bool SetQuantity(int32 num);
-
-	//UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
-	//FName ItemID;
-	//
-	//UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item", meta = (ClampMin = 0))
-	//int32 MaxStack = 1;
-	//
-	//UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Item", meta = (ClampMin = 0))
-	//int32 Quantity = 1;
-	//
-	//UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item")
-	//TEnumAsByte<EItemType> ItemType;
 
 	UFUNCTION(BlueprintCallable, Category = "Ape_Item")
 	FItemInfo GetItemInfo() { return mItemInfo; }

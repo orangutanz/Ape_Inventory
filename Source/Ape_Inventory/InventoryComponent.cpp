@@ -2,114 +2,82 @@
 #include "Item.h"
 #include <cstdlib>
 
-UInventoryComponent::UInventoryComponent()
-{
-}
-
 bool UInventoryComponent::AddItem(UItem* item)
 {
 	if (!item)
 	{
 		return false;
 	}
-	// if the item can not be stacked
+	// Can item stacked
 	if (item->GetMaxStack() == 1)
 	{
 		if (Items.Num() >= MaxSize)
 		{
 			return false;
 		}
-		else // add the item if there's a slot in the inventory
+		else 
 		{
 			Items.Add(item);
-
 			OnInventoryUpdated.Broadcast();
 			return true;
 		}
 	}
-
-	// Try find stackable items to add to
-	//for (auto i : Items)
-	//{
-	//	if (i->GetItemID() == item->GetItemID())
-	//	{
-	//		int32 q = i->GetQuantity();
-	//		int32 m = i->GetMaxStack();
-	//		int32 p = item->GetQuantity(); 
-	//		if (q == m) // If the item stack is full, find the next item.
-	//		{
-	//			continue;
-	//		}
-	//		else if ((p + q) <= m) // If the item can be added within the stackSize
-	//		{
-	//			i->SetQuantity(p + q);
-	//
-	//			OnInventoryUpdated.Broadcast();
-	//			return true;
-	//		}
-	//		else if ((p + q) > m) // If the item added will be more than max stack
-	//		{
-	//			i->SetQuantity(m);
-	//			item->SetQuantity(p - (m - q));
-	//			itemFound = FindItem(item, ++foundIndex);
-	//		}
-	//	}
-	//}
 
 	int32 foundIndex = 0;
 	
 	UItem* itemFound = FindItemID(item->GetItemID(), foundIndex);
 
-	// If there's no same item in the inventory for the item to be stacked
+	// No item for stacking, try add to new slot
 	if (!itemFound)
 	{
 		if (Items.Num() >= MaxSize)
 		{
-			return false;
+			return false; // no space
 		}
-		else // Add the item if there's a slot in the inventory
+		else
 		{
 			Items.Add(item);
 
 			OnInventoryUpdated.Broadcast();
-			return true;
+			return true; // Fully added and return
 		}
 	}
-	else // If there're same items in the inventory already
+	else // Found item for stacking
 	{
 		while (itemFound && (item->GetQuantity() > 0))
 		{
 			int32 q = itemFound->GetQuantity();
 			int32 m = itemFound->GetMaxStack();
 			int32 p = item->GetQuantity();
-			if (q == m) // If the item stack is full, find the next item.
+			if (q == m) // Found item is full, find the next item.
 			{
 				itemFound = FindItemID(item->GetItemID(), ++foundIndex);
 			}
-			else if ((p + q) <= m) // If the item can be added within a stack
+			else if ((p + q) <= m) // FoundItem can be stacked
 			{
 				itemFound->SetQuantity(p + q);
 
 				OnInventoryUpdated.Broadcast();
-				return true;
+				return true; // Fully added and return
 			}
-			else if ((p + q) > m) // If the item added will be more than max stack
+			else if ((p + q) > m) // Found item can be partially stacked
 			{
 				itemFound->SetQuantity(m);
 				item->SetQuantity(p - (m - q));
 				itemFound = FindItemID(item->GetItemID(), ++foundIndex);
 			}
 		}
-		//after all, still add the item if there's a space
+		//After stacking, try add the remaining to new slot
 		if ((item->GetQuantity() > 0) && (Items.Num() < MaxSize))
 		{
 			Items.Add(item);
 
 			OnInventoryUpdated.Broadcast();
-			return true;
+			return true; // Fully added and return
 		}
 	}
-	return false;
+	OnInventoryUpdated.Broadcast();
+	return false; // Partially added and return
 }
 
 bool UInventoryComponent::RemoveItem(UItem* item)
