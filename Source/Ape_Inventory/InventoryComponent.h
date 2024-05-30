@@ -38,6 +38,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Ape_Inventory")
 	void UpdateInventory() { OnInventoryUpdated.Broadcast(); }
+
+	UFUNCTION(BlueprintCallable, Category = "Ape_Inventory")
+	TArray<FItemInfo> GetItemInfos();
 public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Ape_Inventory")
 	TArray<UItem*> Items;

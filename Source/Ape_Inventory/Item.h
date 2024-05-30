@@ -6,7 +6,7 @@
 #include "UObject/NoExportTypes.h"
 #include "Item.generated.h"
 
-class UInventoryComponent;
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnItemUpdated);
 
 UENUM(BlueprintType)
 enum EItemType
@@ -67,6 +67,10 @@ public:
 	/** Return null if (num > Quantity) || (MaxStack == 1) || (num == 0)	*/
 	UFUNCTION(BlueprintCallable, Category = "Ape_Item")
 	UItem* SplitItem(int32 num);
+
+public:
+	UPROPERTY(BlueprintAssignable, Category = "Ape_Inventory")
+	FOnItemUpdated FOnItemUpdated;
 
 private:
 	FItemInfo mItemInfo;

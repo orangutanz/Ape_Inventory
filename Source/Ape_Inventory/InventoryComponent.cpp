@@ -18,7 +18,7 @@ bool UInventoryComponent::AddItem(UItem* item)
 		else 
 		{
 			Items.Add(item);
-			OnInventoryUpdated.Broadcast();
+			OnInventoryUpdated.Broadcast(); //Add new slot
 			return true;
 		}
 	}
@@ -32,14 +32,14 @@ bool UInventoryComponent::AddItem(UItem* item)
 	{
 		if (Items.Num() >= MaxSize)
 		{
-			return false; // no space
+			return false; // No space
 		}
 		else
 		{
 			Items.Add(item);
 
-			OnInventoryUpdated.Broadcast();
-			return true; // Fully added and return
+			OnInventoryUpdated.Broadcast(); //Add new slot
+			return true; // Fully added
 		}
 	}
 	else // Found item for stacking
@@ -53,17 +53,18 @@ bool UInventoryComponent::AddItem(UItem* item)
 			{
 				itemFound = FindItemID(item->GetItemID(), ++foundIndex);
 			}
-			else if ((p + q) <= m) // FoundItem can be stacked
+			else if ((p + q) <= m) // FoundItem can be fully stacked
 			{
 				itemFound->SetQuantity(p + q);
 
-				OnInventoryUpdated.Broadcast();
-				return true; // Fully added and return
+				itemFound->FOnItemUpdated.Broadcast();// update stacked item
+				return true; // Fully added
 			}
 			else if ((p + q) > m) // Found item can be partially stacked
 			{
 				itemFound->SetQuantity(m);
 				item->SetQuantity(p - (m - q));
+				itemFound->FOnItemUpdated.Broadcast();// update stacked item
 				itemFound = FindItemID(item->GetItemID(), ++foundIndex);
 			}
 		}
@@ -73,11 +74,10 @@ bool UInventoryComponent::AddItem(UItem* item)
 			Items.Add(item);
 
 			OnInventoryUpdated.Broadcast();
-			return true; // Fully added and return
+			return true; // Fully added
 		}
 	}
-	OnInventoryUpdated.Broadcast();
-	return false; // Partially added and return
+	return false; // Only partially added
 }
 
 bool UInventoryComponent::RemoveItem(UItem* item)
@@ -163,6 +163,16 @@ bool UInventoryComponent::Contains(UItem* item, int& index)
 {
 	index = Items.Find(item);
 	return (index >= 0);
+}
+
+TArray<FItemInfo> UInventoryComponent::GetItemInfos()
+{
+	TArray<FItemInfo> outArr;
+	for (auto i : Items)
+	{
+		outArr.Add(i->GetItemInfo());
+	}
+	return outArr;
 }
 
 

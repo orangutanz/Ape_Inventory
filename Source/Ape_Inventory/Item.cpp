@@ -2,7 +2,6 @@
 
 
 #include "Item.h"
-#include "InventoryComponent.h"
 
 void UItem::SetItemInfo(FItemInfo info)
 {
@@ -15,6 +14,7 @@ bool UItem::SetQuantity(int32 num)
 		return false;
 
 	mItemInfo.Quantity = num;
+	FOnItemUpdated.Broadcast();
 	return true;
 }
 
@@ -33,6 +33,7 @@ UItem* UItem::SplitItem(int32 num)
 		auto newItem = NewObject<UItem>();
 		newItem->SetItemInfo(newInfo);
 
+		FOnItemUpdated.Broadcast();
 		return newItem;
 	}
 	else if (mItemInfo.Quantity == num)
