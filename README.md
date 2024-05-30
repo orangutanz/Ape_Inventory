@@ -23,4 +23,4 @@ Multiplayer support
 
 Updated video
 
-Better looking UI
+Convert to plugin
