@@ -19,8 +19,10 @@ To Do List:
 
 Change from collision trigger to point & click interaction
 
-Multiplayer support
+Moveable UI
 
 Updated video
 
-Better looking UI
+Multiplayer support
+
+Convert to plugin
