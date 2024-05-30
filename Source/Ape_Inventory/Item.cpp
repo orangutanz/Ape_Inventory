@@ -10,7 +10,7 @@ void UItem::SetItemInfo(FItemInfo info)
 
 bool UItem::SetQuantity(int32 num)
 {
-	if (num == 0 || num > mItemInfo.MaxStack)
+	if (num == 0 || (num > mItemInfo.MaxStack) && (mItemInfo.ItemType != EItemType::Equipment))
 		return false;
 
 	mItemInfo.Quantity = num;
