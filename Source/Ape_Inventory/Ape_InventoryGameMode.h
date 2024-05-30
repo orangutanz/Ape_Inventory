@@ -16,16 +16,6 @@ public:
 	AApe_InventoryGameMode();
 
 
-protected:
-	//UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item System")
-	//class UItemData_Consumable* ConsumableDatabase;
-	//
-	//UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item System")
-	//class UItemData_Equipment* EquipmentDatabase;
-	//
-	//UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Item System")
-	//class UItemData_Material* MaterialDatabase;
-
 public:
 	
 };
