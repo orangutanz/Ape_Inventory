@@ -1,29 +1,33 @@
 # Ape_Inventory
-
 (Dated) Video Link:https://www.youtube.com/watch?v=FxRpeGnaCYo&t=1s&ab_channel=YuhanMa
 
-C++:
+### What does this project includes?
+	Container generation
+	Data driven items
+	Drag n drop moving item
+	InventoryComponent for player/container
+	Item usage
+	Moveable widgets
+	Split item
 
-    UItem  
-    UInventroyComponent
-    
-Blueprint:
-
+## Table of content:
+### C++:
+	UItem  
+	UInventroyComponent
+### Blueprint:
 	Inventory Actor(Player), Container, PickUp
 	Example Datatable
-	Blueprint Interfaces
 	Inventory/Container Widgets
-	Moveable Widgets
+	
 
-
-To Do List:
+## To Do List:
 
 Change from collision trigger to point & click interaction
 
-Save Game
-
-Multiplayer support
-
-Updated video
+A better widget management
 
 Convert to plugin
+
+A how to documentation
+
+Updated video
