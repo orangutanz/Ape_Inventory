@@ -4,11 +4,12 @@
 ### What does this project includes?
 	Container generation
 	Data driven items
-	Drag n drop moving item
+	Drag n drop widgets
 	InventoryComponent for player/container
 	Item usage
 	Moveable widgets
 	Split item
+	Pick ups
 
 ## Table of content:
 ### C++:
@@ -24,10 +25,10 @@
 
 Change from collision trigger to point & click interaction
 
-A better widget management
+Better widget management
 
 Convert to plugin
 
 A how to documentation
 
-Updated video
+Update video
