@@ -23,9 +23,6 @@
 
 ## To Do List:
 
-Change from collision trigger to point & click interaction
-
-Better widget management
 
 Convert to plugin
 
