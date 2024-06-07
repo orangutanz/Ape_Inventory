@@ -24,7 +24,7 @@ public:
 	bool SwapItemByIndex(const int32 a, const int32 b);
 
 	UFUNCTION(BlueprintCallable, Category = "Ape_Inventory")
-	void SortItems(bool sortByItemID = false);
+	void SortItems();
 
 	UFUNCTION(BlueprintCallable, Category = "Ape_Inventory")
 	void TransferItems(UInventoryComponent* toInventory);
