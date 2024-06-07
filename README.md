@@ -23,6 +23,7 @@
 
 ## To Do List:
 
+Add some art
 
 Convert to plugin
 
