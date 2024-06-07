@@ -104,18 +104,12 @@ bool UInventoryComponent::SwapItemByIndex(const int32 a, const int32 b)
 }
 
 
-void UInventoryComponent::SortItems(bool sortByItemID)
-{	
-	if (sortByItemID)
-	{
-		//ID sort
-		Items.Sort([](const UItem& a, const UItem& b) { return a.GetItemID().FastLess(b.GetItemID()); });
-	}
-	else
-	{
-		//Type sort
-		Items.Sort([](const UItem& a, const UItem& b) { return a.GetItemType() <= b.GetItemType(); });
-	}
+void UInventoryComponent::SortItems()
+{
+	//ID sort
+	Items.Sort([](const UItem& a, const UItem& b) { return a.GetItemID().FastLess(b.GetItemID()); });
+	//Type sort
+	//Items.Sort([](const UItem& a, const UItem& b) { return a.GetItemType() <= b.GetItemType(); });
 
 	OnInventoryUpdated.Broadcast();
 }
