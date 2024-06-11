@@ -1,4 +1,5 @@
 # Ape_Inventory
+{In Progress} Google Drive Video Link: https://drive.google.com/file/d/1a0jHCC_Vs2EDEmDx1bKeu759jbVjBbOG/view?usp=sharing 
 (Dated) Video Link:https://www.youtube.com/watch?v=FxRpeGnaCYo&t=1s&ab_channel=YuhanMa
 
 ### What does this project includes?
@@ -24,8 +25,6 @@
 ## To Do List:
 
 Add some art
-
-Convert to plugin
 
 A how to documentation
 
