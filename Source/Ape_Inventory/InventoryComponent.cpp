@@ -103,6 +103,50 @@ bool UInventoryComponent::SwapItemByIndex(const int32 a, const int32 b)
 	return false;
 }
 
+bool UInventoryComponent::MergeItemByIndex(const int32 from, const int32 to)
+{
+	if (from > Items.Num() || to > Items.Num() || (from == to))
+	{
+		return false;
+	}
+	auto fromItem = Items[from]->GetItemInfo();
+	auto toItem = Items[to]->GetItemInfo();
+	if (fromItem.MaxStack <= 1 || toItem.MaxStack <= 1|| (fromItem.ItemID != toItem.ItemID))
+	{
+		return false;
+	}
+	int32 combinedQuantity = fromItem.Quantity + toItem.Quantity;
+	if (combinedQuantity > toItem.MaxStack) // partially merge
+	{
+		toItem.Quantity = toItem.MaxStack;
+		fromItem.Quantity = combinedQuantity - toItem.MaxStack;
+		Items[from]->SetItemInfo(fromItem);
+		Items[to]->SetItemInfo(toItem);
+	}
+	else // fully merge
+	{
+		toItem.Quantity = combinedQuantity;
+		Items[to]->SetItemInfo(toItem);
+		Items.RemoveAt(from);
+	}
+	OnInventoryUpdated.Broadcast();
+	return true;
+}
+
+bool UInventoryComponent::SplitItemInInventory(UItem* item, int32 splitAmount)
+{
+	if (IsInventoryFull() || item->GetQuantity()<2 || item->GetMaxStack() == 1 || !Items.Contains(item) || item->GetQuantity() <= splitAmount)
+	{
+		return false;
+	}	
+	auto newItem = item->SplitItem(splitAmount);
+	if (!newItem)
+		return false;
+	Items.Add(newItem);
+	OnInventoryUpdated.Broadcast();
+	return true;
+}
+
 
 void UInventoryComponent::SortItems()
 {
