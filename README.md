@@ -25,8 +25,6 @@
 
 ## To Do List:
 
-Add some art
-
 A how to documentation
 
 Update video
