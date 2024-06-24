@@ -20,8 +20,11 @@
 ### Blueprint:
 	Inventory Actor(Player), Container, PickUp
 	Example Datatable
-	Inventory/Container Widgets
-	
+	Inventory/Container Widgets	
+### Assets:
+Craft Resources Icons - https://www.unrealengine.com/marketplace/en-US/product/8aa54965c2f64b04810ec8d75cdf9c24
+
+Low Poly Viking Top-Down Interiors - https://www.unrealengine.com/marketplace/en-US/product/low-poly-viking-top-down-interiors
 
 ## To Do List:
 
