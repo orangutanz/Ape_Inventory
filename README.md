@@ -4,14 +4,16 @@
 (Dated) Video Link:https://www.youtube.com/watch?v=FxRpeGnaCYo&t=1s&ab_channel=YuhanMa
 
 ### What does this project includes?
-	Container generation
-	Data driven items
+	Loot generation (container)
+	Data driven items/container
 	Drag n drop widgets
-	InventoryComponent for player/container
+	InventoryComponent for actors
 	Item usage
 	Moveable widgets
 	Split item
-	Pick ups
+	Pick ups (signle item no inventory)
+
+Currently does not support replication(multiplayer) 
 
 ## Table of content:
 ### C++:
@@ -19,8 +21,7 @@
 	UInventroyComponent
 ### Blueprint:
 	Inventory Actor(Player), Container, PickUp
-	Example Datatable
-	Inventory/Container Widgets	
+	Example Datatable, Controls, Widgets, Interfaces, HUD
 ### Assets:
 Craft Resources Icons - https://www.unrealengine.com/marketplace/en-US/product/8aa54965c2f64b04810ec8d75cdf9c24
 
@@ -31,3 +32,5 @@ Low Poly Viking Top-Down Interiors - https://www.unrealengine.com/marketplace/en
 A how to documentation
 
 Update video
+
+
