@@ -1,7 +1,5 @@
 # Ape_Inventory
-{In Progress} Google Drive Video Link: https://drive.google.com/file/d/1a0jHCC_Vs2EDEmDx1bKeu759jbVjBbOG/view?usp=sharing 
-
-(Dated) Video Link:https://www.youtube.com/watch?v=FxRpeGnaCYo&t=1s&ab_channel=YuhanMa
+Video Link: https://youtu.be/ZcTXl1WSwGc
 
 ### What does this project includes?
 	Loot generation (container)
@@ -30,7 +28,3 @@ Low Poly Viking Top-Down Interiors - https://www.unrealengine.com/marketplace/en
 ## To Do List:
 
 A how to documentation
-
-Update video
-
-
