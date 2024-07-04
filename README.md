@@ -1,5 +1,5 @@
 # Ape_Inventory
-Video Link: https://youtu.be/ZcTXl1WSwGc
+Video Link: https://youtu.be/aqj3OpbzW2s
 
 ### What does this project includes?
 	Loot generation (container)
